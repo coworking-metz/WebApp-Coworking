@@ -5,7 +5,7 @@
                 <div class="columns is-centered">
                     <div class="column is-5-tablet is-4-desktop is-3-widescreen">
                         <center class="mb-2">
-                            <img src="./assets/logo.png"><br>
+                            <img src="./assets/logo.png" style="width:100%"><br>
                         </center>
                         <div class="box">
                             <h2 class="title">Coworking App</h2>
