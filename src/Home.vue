@@ -33,9 +33,8 @@
     </section>
 </template>
 <script setup>
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth'
-import { inject } from 'vue';
 
 const router = inject('router');
 

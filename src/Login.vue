@@ -44,9 +44,8 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth'
-import { inject } from 'vue';
 
 const router = inject('router');
 
