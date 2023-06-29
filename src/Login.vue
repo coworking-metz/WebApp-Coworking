@@ -52,8 +52,8 @@ const router = inject('router');
 const auth = useAuthStore();
 const data = reactive({
     loading: false,
-    email: 'gilles@sopress.net',
-    password: 'ameno99'
+    email: '',
+    password: ''
 });
 
 const connexion = () => {
