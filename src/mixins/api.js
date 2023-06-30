@@ -38,8 +38,11 @@ export function useApi() {
                 options.body = JSON.stringify(payload);
             }
 
+            let url = uri;
+            if (!uri.includes('http')) {
+                url = import.meta.env.VITE_WP_API_ROOT + uri;
+            }
 
-            const url = import.meta.env.VITE_WP_API_ROOT + uri;
             const response = await fetch(url, options);
             return response;
         } catch (error) {
