@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3 class="title is-5">Occupation de l'espace</h3>
-        <p class="subtitle is-6">
+        <p class="is-7">
             <template v-if="!auth.settings.occupation.presents">Le coworking est vide !</template>
             <template v-else>
                 <template v-if="auth.settings.occupation.presents == 1">1 poste occupé sur les {{

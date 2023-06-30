@@ -1,19 +1,17 @@
 <template>
     <!-- Titre de la section -->
     <h3 class="title is-5">Accès</h3>
-
+    <p class="mb-4 is-7">
+        <!-- Description du bouton d'ouverture du portail -->
+        Ce bouton déclenche le déverrouillage du <a @click="voirPhotoPortail">portail piéton de Bliiida</a>.
+        Le portail reste déverrouillé pendant quelques secondes.
+    </p>
     <div class="field">
         <p class="control">
             <!-- Bouton d'ouverture du portail -->
             <button class="button is-link" :class="{ 'is-loading': data.loading, 'is-success': data.portail_ouvert }"
                 @click="ouvrirPortail">{{ data.message_portail }}
             </button>
-        </p>
-
-        <p class="mt-4 is-7">
-            <!-- Description du bouton d'ouverture du portail -->
-            Ce bouton déclenche le déverrouillage du <a @click="voirPhotoPortail">portail piéton de Bliiida</a>.
-            Le portail reste déverrouillé pendant quelques secondes.
         </p>
     </div>
 

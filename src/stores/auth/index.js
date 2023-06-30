@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
+import { useApi } from '@/mixins/api.js';
 
+const api = useApi();
 export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({ identifiant: false, id: false, droits: {}, settings: {} }),
@@ -14,26 +16,12 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     getDroits() {
-      return fetch('https://www.coworking-metz.fr/api-json-wp/cowo/v1/app-droits', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': import.meta.env.VITE_APP_AUTH_TOKEN
-        },
-        body: JSON.stringify({ user_id: this.id }),
-      }).then(response => {
-        const data = response.json();
+      return api.post('app-droits', { user_id: this.id }).then(data => {
         this.droits = data.droits;
       })
     },
     getSettings() {
-      return fetch('https://www.coworking-metz.fr/api-json-wp/cowo/v1/app-settings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': import.meta.env.VITE_APP_AUTH_TOKEN
-        }
-      }).then(response => response.json()).then(data => {
+      return api.post('app-settings').then(data => {
         this.settings = data.settings;
       })
     }

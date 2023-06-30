@@ -1,36 +1,23 @@
 <template>
-    <section class="hero is-fullheight" style="background-color: #f2af10;">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns is-centered">
-                    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-                        <center class="mb-2">
-                            <img src="./assets/logo.png" style="width:100%"><br>
-                        </center>
-                        <div class="box">
-                            <template v-if="data.ready">
-                                <h2 class="title">Coworking App</h2>
-                                <p class="subtitle is-7">Compte connecté: {{ auth.identifiant }}</p>
+    <div class="box">
+        <template v-if="data.ready">
+            <h2 class="title">Coworking App</h2>
+            <p class="subtitle is-7">Compte connecté: {{ auth.identifiant }}</p>
 
-                                <hr>
-                                <portail />
-                                <hr>
-                                <presence />
-                            </template>
-                            <template v-else>
-                                <center>
-                                    <p>Chargement en cours</p><button class="button is-loading" style="border: 0;"></button>
-                                </center>
-                            </template>
-                        </div>
-                        <div v-if="data.ready">
-                            <button class="button is-text" @click="deconnecter">Se déconnecter</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <hr>
+            <portail />
+            <hr>
+            <presence />
+        </template>
+        <template v-else>
+            <center>
+                <p>Chargement en cours</p><button class="button is-loading" style="border: 0;"></button>
+            </center>
+        </template>
+    </div>
+    <div v-if="data.ready">
+        <button class="button is-text" @click="deconnecter">Se déconnecter</button>
+    </div>
 </template>
 <script setup>
 import { reactive, onMounted, inject } from 'vue';
