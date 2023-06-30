@@ -62,9 +62,9 @@ const ouvrirPortail = () => {
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
     const message = 'Ouverture du portail demandée';
 
-    if (import.meta.env.VITE_ENV == 'DEV') {
-        return portailOuvert(message);
-    }
+    // if (import.meta.env.VITE_ENV == 'DEV') {
+    //     return portailOuvert(message);
+    // }
 
     data.loading = true;
 
@@ -91,7 +91,7 @@ const ouvrirPortail = () => {
 
 // Fonction pour enregistrer l'ouverture du portail dans la base de données
 function logOuverture() {
-    if (import.meta.env.VITE_ENV == 'DEV') return;
+    // if (import.meta.env.VITE_ENV == 'DEV') return;
 
     try {
         const client = new Client();
