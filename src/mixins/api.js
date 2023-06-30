@@ -9,7 +9,6 @@ function objectToQueryString(obj) {
             params.append(key, obj[key]);
         }
     }
-
     return params.toString();
 }
 
