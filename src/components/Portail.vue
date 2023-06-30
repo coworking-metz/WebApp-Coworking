@@ -9,7 +9,7 @@
                 Bliiida</a>. Le portail reste déverrouillé pendant quelques secondes.</p>
     </div>
     <div id="photo-portail" v-if="data.afficher_porte_portail"><img @click="data.afficher_porte_portail = false"
-            src="./assets/portail.png"><a @click="data.afficher_porte_portail = false">Fermer</a></div>
+            src="../assets/portail.png"><a @click="data.afficher_porte_portail = false">Fermer</a></div>
 </template>
 
 <script setup>
