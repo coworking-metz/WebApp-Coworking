@@ -79,6 +79,10 @@ const connexion = () => {
                 auth.identifiant = data.user.login;
                 auth.id = data.user.id;
                 router.push('/')
+            } else {
+                if (data?.code) {
+                    return alert(data.message);
+                }
             }
         })
         .catch(error => {
