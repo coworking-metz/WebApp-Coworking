@@ -77,6 +77,7 @@ const connexion = () => {
         .then(data => {
             if (data.user) {
                 auth.identifiant = data.user.login;
+                auth.id = data.user.id;
                 router.push('/')
             }
         })
