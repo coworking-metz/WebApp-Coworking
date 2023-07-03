@@ -1,39 +1,43 @@
 <template>
-    <form @submit.prevent="connexion" class="box">
-        <h2 class="title">Coworking App</h2>
-        <p class="subtitle">Connectez-vous avec votre identifiant Coworking</p>
+  <form class="box" @submit.prevent="connexion">
+    <h2 class="title">Coworking App</h2>
+    <p class="subtitle">Connectez-vous avec votre identifiant Coworking</p>
 
-        <div class="field">
-            <label for="" class="label">Email</label>
-            <div class="control has-icons-left">
-                <input type="email" class="input" v-model="data.email" required>
-                <span class="icon is-small is-left">
-                    <i class="fa fa-envelope"></i>
-                </span>
-            </div>
-        </div>
-        <div class="field">
-            <label for="" class="label">Mot de passe</label>
-            <div class="control has-icons-left">
-                <input type="password" class="input" v-model="data.password" required>
-                <span class="icon is-small is-left">
-                    <i class="fa fa-lock"></i>
-                </span>
-            </div>
-        </div>
+    <div class="field">
+      <label class="label" for="email">Email</label>
+      <div class="control has-icons-left">
+        <input v-model="data.email" class="input" name="email" required type="email" />
+        <span class="icon is-small is-left">
+          <i class="fa fa-envelope"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="password">Mot de passe</label>
+      <div class="control has-icons-left">
+        <input v-model="data.password" class="input" name="password" required type="password" />
+        <span class="icon is-small is-left">
+          <i class="fa fa-lock"></i>
+        </span>
+      </div>
+    </div>
 
-        <div class="field">
-            <button class="button is-success" :class="{ 'is-loading': api.isLoading.value }">
-                Se connecter
-            </button>
-        </div>
-        <a href="https://www.coworking-metz.fr/mon-compte/mot-de-passe-perdu/">Mot de passe perdu ?</a>
-    </form>
+    <div class="field">
+      <button
+        class="button is-success"
+        :class="{ 'is-loading': api.isLoading.value }"
+        type="button">
+        Se connecter
+      </button>
+    </div>
+    <a href="https://www.coworking-metz.fr/mon-compte/mot-de-passe-perdu/">Mot de passe perdu ?</a>
+  </form>
 </template>
+
 <script setup>
 import { reactive, inject } from 'vue';
-import { useAuthStore } from '@/stores/auth'
-import { useApi } from '@/mixins/api.js';
+import { useAuthStore } from '@/stores/auth';
+import { useApi } from '@/mixins/api';
 
 const api = useApi();
 
@@ -45,33 +49,28 @@ const auth = useAuthStore();
 
 // État réactif pour les données du formulaire
 const data = reactive({
-    email: import.meta.env.VITE_TEST_EMAIL, // Champ de saisie de l'email
-    password: import.meta.env.VITE_TEST_PASSWORD // Champ de saisie du mot de passe
+  email: import.meta.env.VITE_TEST_EMAIL, // Champ de saisie de l'email
+  password: import.meta.env.VITE_TEST_PASSWORD, // Champ de saisie du mot de passe
 });
 
 // Fonction pour gérer la soumission du formulaire de connexion
 const connexion = () => {
-    // Données à envoyer pour la connexion (ajouter vos données ici)
-    const payload = {
-        email: data.email,
-        password: data.password
-    };
+  // Données à envoyer pour la connexion (ajouter vos données ici)
+  const payload = {
+    email: data.email,
+    password: data.password,
+  };
 
-    api.post('app-auth', payload).then(data => {
-        if (data.user) {
-            // Authentification réussie
-            auth.identifiant = data.user.login;
-            auth.id = data.user.id;
-            router.push('/'); // Redirection vers la page d'accueil
-        } else {
-            // Gestion des erreurs d'authentification
-            if (data?.code) {
-                return alert(data.message);
-            }
-        }
-    });
-
-
-}
-
+  api.post('app-auth', payload).then((response) => {
+    if (response.user) {
+      // Authentification réussie
+      auth.identifiant = response.user.login;
+      auth.id = response.user.id;
+      router.push('/'); // Redirection vers la page d'accueil
+    } else if (response?.code) {
+      // Gestion des erreurs d'authentification
+      return alert(response.message);
+    }
+  });
+};
 </script>
