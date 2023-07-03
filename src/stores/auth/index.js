@@ -4,11 +4,24 @@ import { useApi } from '@/mixins/api.js';
 const api = useApi();
 export const useAuthStore = defineStore('auth', {
   persist: true,
-  state: () => ({ identifiant: false, id: false, droits: {}, settings: {} }),
+  state: () => ({
+    identifiant: false,
+    id: false,
+    session: false,
+    droits: {},
+    settings: {}
+  }),
   getters: {
     // doubleCount: (state) => state.count * 2,
   },
   actions: {
+    // Fonction deconnecter pour déconnecter l'utilisateur
+    deconnecter() {
+      // Mettre l'identifiant à null et rediriger vers la page de connexion
+      this.identifiant = null;
+      this.id = null;
+      this.session = null;
+    },
     droit(droit) {
       if (this.droits) {
         const ret = this.droits[droit] || false;

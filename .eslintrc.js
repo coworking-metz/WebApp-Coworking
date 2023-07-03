@@ -69,7 +69,7 @@ module.exports = {
         printWidth: 100,
         semi: true,
         singleQuote: true,
-        tabWidth: 2,
+        tabWidth: 4,
         trailingComma: 'all',
         endOfLine: 'auto',
       },
