@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', {
     identifiant: false,
     id: false,
     session: false,
+    admin: false,
     droits: {},
     settings: {}
   }),
@@ -21,17 +22,19 @@ export const useAuthStore = defineStore('auth', {
       this.identifiant = null;
       this.id = null;
       this.session = null;
+      this.admin = null;
     },
     droit(droit) {
       if (this.droits) {
         const ret = this.droits[droit] || false;
-        return !!ret;
+        return ret ? true : false;
       }
       return false;
     },
     getDroits() {
       return api.post('app-droits', { user_id: this.id }).then((data) => {
         this.droits = data.droits;
+        this.admin = data.admin;
       });
     },
     getSettings() {

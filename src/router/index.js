@@ -11,5 +11,9 @@ export default createRouter({
       path: '/login',
       component: () => import('../Login.vue'),
     },
+    {
+      path: '/admin/portail',
+      component: () => import('../vues/Admin/Portail.vue'),
+    },
   ],
 });
