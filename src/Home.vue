@@ -70,6 +70,7 @@ onMounted(async () => {
 
             // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
             if (!response.session) {
+                console.log('Session invalide');
                 auth.deconnecter();
                 router.push('/login');
 
