@@ -30,10 +30,15 @@
                     <button class="button is-link"
                         :class="{ 'is-loading': data.loading, 'is-success': data.portail_ouvert }"
                         @click="ouvrirPortail">
-                        {{ data.message_portail }}
+                        <span class="icon is-small">
+                            <i class="fas" :class="'fa-' + data.icone"></i>
+                        </span>
+                        <span>
+                            {{ data.message_portail }}
+                        </span>
                     </button>
                     <template v-if="reglages.admin">
-                        <router-link to="/admin/portail" class="button is-text is-small">Historique des
+                        <router-link to="/admin/portail">Historique des
                             accès</router-link>
                     </template>
                 </div>
@@ -59,6 +64,7 @@ const reglages = useReglagesStore();
 
 // État réactif du composant
 const data = reactive({
+    icone: 'key',
     loading: false, // Indicateur de chargement
     portail_ouvert: false, // Indicateur de déverrouillage du portail
     message_portail: 'Ouvrir le portail', // Message du bouton d'ouverture du portail
@@ -69,11 +75,13 @@ const data = reactive({
 const portailOuvert = (message) => {
     data.message_portail = message;
     data.portail_ouvert = true;
+    data.icone = 'door-open';
 
     // Réinitialisation de l'état après quelques secondes
     setTimeout(() => {
         data.message_portail = 'Ouvrir le portail';
         data.portail_ouvert = false;
+        data.icone = 'key';
     }, 3000);
 
     logOuverture(); // Enregistrement de l'ouverture du portail
@@ -88,7 +96,7 @@ const ouvrirPortail = () => {
 
     const url = 'https://tickets.coworking-metz.fr/api/interphone';
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
-    const message = 'Ouverture du portail demandée';
+    const message = 'Portail ouvert';
 
     // if (import.meta.env.VITE_ENV == 'DEV') {
     //     return portailOuvert(message);
@@ -107,7 +115,7 @@ const ouvrirPortail = () => {
     })
         .then((response) => response.json())
         .then((responseBody) => {
-            portailOuvert(responseBody.message);
+            portailOuvert(message);
         })
         .catch((error) => {
             console.error(error);
