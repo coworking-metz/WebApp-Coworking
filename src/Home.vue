@@ -3,7 +3,11 @@
         <!-- Si data.demarrer est vrai, affiche le contenu de l'application de coworking -->
         <template v-if="data.demarrer">
             <h2 class="title">Coworking App</h2>
-            <p class="subtitle is-7">Compte connecté: {{ auth.identifiant }}</p>
+            <p class="is-7">{{ auth.identifiant }}
+                &middot; <a href="https://www.coworking-metz.fr/mon-compte/">Mon compte</a> &middot; <a
+                    @click="deconnecter">Se déconnecter</a>
+
+            </p>
 
             <hr />
             <Portail></Portail>
@@ -20,10 +24,10 @@
             </div>
         </template>
     </div>
-    <!-- Si data.demarrer est vrai, affiche le bouton de déconnexion -->
+    <!-- Si data.demarrer est vrai, affiche le bouton de déconnexion 
     <div v-if="data.demarrer">
         <button class="button is-text" type="button" @click="deconnecter">Se déconnecter</button>
-    </div>
+    </div>-->
 </template>
 
 <script setup>
