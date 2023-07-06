@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { useApi } from '@/mixins/api.js';
 import { useAuthStore } from '@/stores/auth';
+import { afterOneHour } from '@/mixins/utils.js';
 
 const api = useApi();
 export const useReglagesStore = defineStore('reglages', {
