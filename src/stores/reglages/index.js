@@ -22,7 +22,7 @@ export const useReglagesStore = defineStore('reglages', {
       // if (this.droits) return Promise.resolve();
 
       return api.post('app-droits', { user_id: this.id }).then((data) => {
-        afterOneHour(() => this.droits = null);
+        // afterOneHour(() => this.droits = null);
         this.droits = data.droits;
         this.settings = data.settings;
 
