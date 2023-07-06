@@ -19,17 +19,20 @@ const props = defineProps({
     },
 });
 const entree = reactive(props.entree);
-
 const dateFr = computed(() => {
     if (!entree.date) return;
 
     const date = new Date(entree.date);
     const now = new Date();
 
+    // Adjust for GMT+2
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    today.setUTCHours(today.getUTCHours() + 2);
 
-    const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
+    const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    yesterday.setUTCHours(yesterday.getUTCHours() + 2);
+
+    const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Europe/Paris' };
     const time = date.toLocaleString('fr-FR', options);
 
     let ret;
@@ -38,12 +41,13 @@ const dateFr = computed(() => {
     } else if (date >= yesterday && date < today) {
         ret = `hier à ${time}`;
     } else {
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Europe/Paris' };
         ret = 'Le ' + date.toLocaleString('fr-FR', options);
     }
 
     return ret;
 });
+
 
 
 </script>

@@ -16,3 +16,8 @@
     </div>
   </section>
 </template>
+<style  >
+.media-content {
+  overflow: initial !important;
+}
+</style>

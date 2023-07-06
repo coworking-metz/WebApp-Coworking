@@ -1,24 +1,45 @@
 <template>
     <!-- Titre de la section -->
     <h3 class="title is-5">Accès</h3>
-    <p class="mb-4 is-7">
-        <!-- Description du bouton d'ouverture du portail -->
-        Ce bouton déclenche le déverrouillage du
-        <a @click="voirPhotoPortail">portail piéton de Bliiida</a>
-        . Le portail reste déverrouillé pendant quelques secondes.
-    </p>
-    <div class="buttons">
-        <!-- Bouton d'ouverture du portail -->
-        <button class="button is-link"
-            :class="{ 'is-loading': data.loading, 'is-success': data.portail_ouvert }"
-            @click="ouvrirPortail">
-            {{ data.message_portail }}
-        </button>
-        <template v-if="auth.admin">
-            <router-link to="/admin/portail" class="button is-text is-small">Historique des
-                accès</router-link>
-        </template>
-    </div>
+    <article class="media mt-5">
+        <figure class="media-left">
+            <p class="image is-64x64">
+
+                <svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 40"
+                    xml:space="preserve" fill="#f2af10">
+                    <path fill="none" d="M0 0H32V32H0z" />
+                    <path d="M19 27 9 27 9 22 11 22 11 25 17 25 17 7 11 7 11 11 9 11 9 5 19 5z" />
+                    <path d="M17 1.6 17 30.4 27 26.7 27 5.3z" />
+                    <path d="M5 16H15V23H5z" />
+                    <path d="M13 18H7v-5a3 3 0 0 1 6 0v5zm-4-2h2v-3a1 1 0 0 0-2 0v3z" />
+                </svg>
+
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+
+                <p class="mb-4 is-7">
+                    <!-- Description du bouton d'ouverture du portail -->
+                    Ce bouton déclenche le déverrouillage du
+                    <a @click="voirPhotoPortail">portail piéton de Bliiida</a>
+                    . Le portail reste déverrouillé pendant quelques secondes.
+                </p>
+                <div class="buttons">
+                    <!-- Bouton d'ouverture du portail -->
+                    <button class="button is-link"
+                        :class="{ 'is-loading': data.loading, 'is-success': data.portail_ouvert }"
+                        @click="ouvrirPortail">
+                        {{ data.message_portail }}
+                    </button>
+                    <template v-if="reglages.admin">
+                        <router-link to="/admin/portail" class="button is-text is-small">Historique des
+                            accès</router-link>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </article>
 
     <!-- Affichage de la photo du portail -->
     <div v-if="data.afficher_porte_portail" id="photo-portail">
@@ -31,8 +52,10 @@
 import { reactive } from 'vue';
 import { Client, Databases, ID, Account } from 'appwrite';
 import { useAuthStore } from '@/stores/auth';
+import { useReglagesStore } from '@/stores/reglages';
 
 const auth = useAuthStore();
+const reglages = useReglagesStore();
 
 // État réactif du composant
 const data = reactive({
@@ -59,7 +82,7 @@ const portailOuvert = (message) => {
 // Fonction pour ouvrir le portail
 const ouvrirPortail = () => {
     // Vérification des droits de l'utilisateur
-    if (!auth.droit('ouvrir_portail')) {
+    if (!reglages.droit('ouvrir_portail')) {
         return alert('Vous ne pouvez pas ouvrir le portail.');
     }
 

@@ -6,11 +6,11 @@
             <p class="subtitle is-7">Compte connecté: {{ auth.identifiant }}</p>
 
             <hr />
-            <!-- Inclure le composant Portail -->
             <Portail></Portail>
             <hr />
-            <!-- Inclure le composant Presence -->
             <Presence></Presence>
+            <hr />
+            <Signal></Signal>
         </template>
         <!-- Si data.demarrer est faux, affiche le message de chargement -->
         <template v-else>
@@ -30,8 +30,10 @@
 // Importation des packages et composants nécessaires
 import { reactive, onMounted, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useReglagesStore } from '@/stores/reglages';
 import Portail from '@/components/Portail.vue';
 import Presence from '@/components/Presence.vue';
+import Signal from '@/components/Signal.vue';
 import { useApi } from '@/mixins/api';
 
 // Utiliser l'API
@@ -45,6 +47,9 @@ const data = reactive({ demarrer: false });
 
 // Utiliser le store d'authentification
 const auth = useAuthStore();
+
+// Utiliser le store des settings
+const reglages = useReglagesStore();
 
 // Lorsque le composant est monté
 onMounted(async () => {
@@ -66,14 +71,11 @@ onMounted(async () => {
 
             } else {
                 // Si les données de session sont disponibles, obtenir les paramètres et les droits
-                await auth.getSettings();
-                console.log('Paramètres chargés');
-                await auth.getDroits();
+                await reglages.getDroits();
                 console.log('Droits chargés');
 
                 // Ensuite, mettre data.demarrer à vrai
                 data.demarrer = true;
-                console.log('data.demarrer', data.demarrer);
             }
         } catch (error) {
             // Journaliser toutes les erreurs
@@ -81,6 +83,11 @@ onMounted(async () => {
         }
     }
 });
+const deconnecter = () => {
+    // Déconnecter l'utilisateur
+    auth.deconnecter();
 
-
+    // Rediriger vers la page de connexion
+    router.push('/login');
+}
 </script>
