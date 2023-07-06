@@ -5,8 +5,7 @@
         <article class="media mt-5">
             <figure class="media-left">
                 <p class="image is-64x64">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
-                        viewBox="0 0 200 200">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="80" fill="none" stroke="#cccccc"
                             stroke-width="20" />
                         <circle cx="100" cy="100" r="80" fill="none" stroke="#f2af10" stroke-width="20"
