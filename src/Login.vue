@@ -35,6 +35,7 @@
 <script setup>
 import { reactive, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useReglagesStore } from '@/stores/reglages';
 import { useApi } from '@/mixins/api';
 const api = useApi();
 
@@ -43,6 +44,9 @@ const router = inject('router');
 
 // Utilisation du store d'authentification
 const auth = useAuthStore();
+
+// Utiliser le store des settings
+const reglages = useReglagesStore();
 
 // État réactif pour les données du formulaire
 const data = reactive({
@@ -63,6 +67,12 @@ const connexion = () => {
             auth.identifiant = response.user.login;
             auth.id = response.user.id;
             auth.session = response.user.session_id;
+            auth.fresh = true;
+
+            reglages.reset();
+            reglages.droits = response.reglages.droits;
+            reglages.settings = response.reglages.settings;
+            reglages.admin = response.reglages.admin;
             router.push('/'); // Redirection vers la page d'accueil
         } else if (response?.code) {
             // Gestion des erreurs d'authentification

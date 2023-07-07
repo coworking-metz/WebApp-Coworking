@@ -64,28 +64,31 @@ onMounted(async () => {
     if (!auth.session) {
         router.push('/login');
     } else {
-        // Si une session est disponible, obtenir les détails de la session à partir de l'API
-        try {
-            const response = await api.post('app-session');
+        if (auth.fresh) {
+            auth.fresh = false;
+        } else {
+            // Si une session est disponible, obtenir les détails de la session à partir de l'API
+            try {
+                const response = await api.post('app-session');
 
-            // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
-            if (!response.session) {
-                console.log('Session invalide');
-                auth.deconnecter();
-                router.push('/login');
+                // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
+                if (!response.session) {
+                    console.log('Session invalide');
+                    auth.deconnecter();
+                    router.push('/login');
 
-            } else {
-                // Si les données de session sont disponibles, obtenir les paramètres et les droits
-                await reglages.getDroits();
-                console.log('Droits chargés');
+                } else {
+                    // Si les données de session sont disponibles, obtenir les paramètres et les droits
+                    await reglages.getDroits();
 
-                // Ensuite, mettre data.demarrer à vrai
-                data.demarrer = true;
+                    // Ensuite, mettre data.demarrer à vrai
+                }
+            } catch (error) {
+                // Journaliser toutes les erreurs
+                console.error(error);
             }
-        } catch (error) {
-            // Journaliser toutes les erreurs
-            console.error(error);
         }
+        data.demarrer = true;
     }
 });
 const deconnecter = () => {
