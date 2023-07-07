@@ -68,25 +68,15 @@ onMounted(async () => {
             auth.fresh = false;
         } else {
             // Si une session est disponible, obtenir les détails de la session à partir de l'API
-            try {
-                const response = await api.post('app-session');
+            api.post('app-session').then(response => {
 
                 // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
                 if (!response.session) {
                     console.log('Session invalide');
                     auth.deconnecter();
                     router.push('/login');
-
-                } else {
-                    // Si les données de session sont disponibles, obtenir les paramètres et les droits
-                    await reglages.getDroits();
-
-                    // Ensuite, mettre data.demarrer à vrai
                 }
-            } catch (error) {
-                // Journaliser toutes les erreurs
-                console.error(error);
-            }
+            });
         }
         data.demarrer = true;
     }
