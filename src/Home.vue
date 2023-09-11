@@ -81,9 +81,9 @@ onMounted(async () => {
         data.demarrer = true;
     }
 });
-const deconnecter = () => {
+const deconnecter = async () => {
     // Déconnecter l'utilisateur
-    auth.deconnecter();
+    await auth.deconnecter();
 
     // Rediriger vers la page de connexion
     router.push('/login');

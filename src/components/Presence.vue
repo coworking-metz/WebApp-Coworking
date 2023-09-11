@@ -40,8 +40,7 @@
 
                     <template v-if="reglages.admin">
                         <p class="mt-3">
-                            <a
-                                href="https://www.coworking-metz.fr/d92m56-c3wf4-fx2ypx-55qas-nv2au-e8ep/">
+                            <a href="https://storied-speculoos-d61724.netlify.app/">
                                 Voir le détail des présences
                             </a>
                         </p>
