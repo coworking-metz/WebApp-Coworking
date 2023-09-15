@@ -1,33 +1,50 @@
 <template>
-    <div class="box">
+    <div>
         <!-- Si data.demarrer est vrai, affiche le contenu de l'application de coworking -->
         <template v-if="data.demarrer">
-            <h2 class="title">Coworking App</h2>
-            <p class="is-7">{{ auth.identifiant }}
-                &middot; <a href="https://www.coworking-metz.fr/mon-compte/">Mon compte</a> &middot; <a
-                    @click="deconnecter">Se déconnecter</a>
+            <div class="card mb-5">
+                <div class="card-content">
+                    <div class="media">
+                        <a href="https://www.coworking-metz.fr/mon-compte/polaroid/" class="media-left">
+                            <figure class="image is-64x64">
+                                <img
+                                    :src="'https://www.coworking-metz.fr/polaroid/' + auth.id + '.jpg'">
+                            </figure>
+                        </a>
+                        <div class="media-content">
+                            <p class="title is-4">{{ auth.identifiant }}</p>
+                            <p class="subtitle is-6"><a
+                                    href="https://www.coworking-metz.fr/mon-compte/">Mon compte</a>
+                                &middot; <a @click="deconnecter">Se déconnecter</a></p>
+                        </div>
+                    </div>
 
-            </p>
-
-            <hr />
-            <Portail></Portail>
-            <hr />
-            <Presence></Presence>
-            <hr />
-            <Signal></Signal>
+                </div>
+            </div>
+            <div class="box">
+                <Portail></Portail>
+            </div>
+            <div class="box">
+                <Presence></Presence>
+            </div>
+            <div class="box">
+                <Signal></Signal>
+            </div>
         </template>
         <!-- Si data.demarrer est faux, affiche le message de chargement -->
         <template v-else>
-            <div align="center">
-                <p>Chargement en cours</p>
-                <button class="button is-loading" style="border: 0" type="button"></button>
+            <div class="box">
+                <div align="center">
+                    <p>Chargement en cours</p>
+                    <button class="button is-loading" style="border: 0" type="button"></button>
+                </div>
             </div>
         </template>
-    </div>
-    <!-- Si data.demarrer est vrai, affiche le bouton de déconnexion 
+        <!-- Si data.demarrer est vrai, affiche le bouton de déconnexion 
     <div v-if="data.demarrer">
         <button class="button is-text" type="button" @click="deconnecter">Se déconnecter</button>
     </div>-->
+    </div>
 </template>
 
 <script setup>

@@ -6,7 +6,8 @@
           <div class="column  is-5-widescreen">
             <div align="center" class="mb-4">
               <a href="https://coworking-metz.fr">
-                <img alt="Coworking logo" src="./assets/logo.png" style="width: 100%" />
+                <img alt="Coworking logo" src="./assets/logo.png"
+                  style="max-width:80%;width: 200px" />
               </a>
             </div>
             <router-view />
