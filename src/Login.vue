@@ -58,16 +58,16 @@ const data = reactive({
 const connexion = () => {
     // Données à envoyer pour la connexion (ajouter vos données ici)
     const payload = {
-        email: data.email,
+        identifiant: data.email,
         password: data.password,
     };
-    api.post('app-auth', payload).then((response) => {
+    api.post('connexion', payload).then((response) => {
         if (response.user) {
             // Authentification réussie
             auth.identifiant = response.user.login;
             auth.id = response.user.id;
-            auth.session = response.user.session_id;
-            auth.fresh = true;
+            auth.token = response.token;
+            auth.premierAffichageApresLogin = true;
 
             reglages.reset();
             reglages.droits = response.reglages.droits;

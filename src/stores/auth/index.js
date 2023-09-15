@@ -7,23 +7,18 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     identifiant: false,
     id: false,
-    session: false,
-    fresh: false
+    token: false,
+    premierAffichageApresLogin: false
   }),
   actions: {
     // Fonction deconnecter pour déconnecter l'utilisateur
     async deconnecter() {
 
-      const payload = {
-        user_id: this.id,
-        session: this.session,
-      };
-      console.log(payload);
-      const response = await api.del('app-session', payload);
+      const response = await api.del('session');
       this.identifiant = false;
       this.id = false;
-      this.session = false;
-      this.fresh = false;
+      this.token = false;
+      this.premierAffichageApresLogin = false;
     },
   },
 });

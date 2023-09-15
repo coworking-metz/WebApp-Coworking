@@ -61,15 +61,15 @@ onMounted(async () => {
     data.demarrer = false;
 
     // Si aucune session n'est disponible, redirige vers la page de connexion
-    if (!auth.session) {
+    if (!auth.token) {
         router.push('/login');
     } else {
-        if (auth.fresh) {
-            auth.fresh = false;
+        // 
+        if (auth.premierAffichageApresLogin) {
+            auth.premierAffichageApresLogin = false;
         } else {
             // Si une session est disponible, obtenir les détails de la session à partir de l'API
-            api.post('app-session').then(response => {
-
+            api.post('session').then(response => {
                 // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
                 if (!response.session) {
                     console.log('Session invalide');

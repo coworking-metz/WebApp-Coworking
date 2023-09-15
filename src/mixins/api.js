@@ -33,7 +33,9 @@ export function useApi() {
      */
     async function get(uri, payload = null, options = {}) {
         options.method = 'GET';
-        uri += `?${objectToQueryString(payload)}`;
+        if(payload) {
+            uri += `?${objectToQueryString(payload)}`;
+        }
         return await query(uri, null, options).then((response) => response.json());
     }
 
@@ -62,21 +64,20 @@ export function useApi() {
 
             options.headers = options.headers || {};
             options.headers['Content-Type'] = 'application/json';
-            options.headers.Authorization = import.meta.env.VITE_APP_AUTH_TOKEN;
+            options.headers.Authorization = `Token ${import.meta.env.VITE_APP_TOKEN}`;
+
             if (payload) {
                 options.body = payload;
             }
 
             const auth = useAuthStore();
-            if (auth.session) {
-                options.body = options.body || {}
-                options.body.user_id = auth.id;
-                options.body.session = auth.session;
+            if (auth.token) {
+                options.headers.Token = auth.token;
             }
 
             let url = uri;
             if (!uri.includes('http')) {
-                url = import.meta.env.VITE_WP_API_ROOT + uri;
+                url = import.meta.env.VITE_API_TICKETS + uri;
             }
 
             options.body = JSON.stringify(options.body);

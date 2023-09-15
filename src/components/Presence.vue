@@ -32,7 +32,7 @@
                                 disponibles
                             </template>
                             <template v-else>
-                                {{ reglages.settings.occupation.presents }} postes occuppés sur les
+                                {{ reglages.settings.occupation.presents }} postes occupés sur les
                                 {{ reglages.settings.occupation.total }} disponibles.
                             </template>
                         </template>
