@@ -15,11 +15,11 @@
 
                 </div>
                 <footer class="card-footer">
-                    <a href="https://www.coworking-metz.fr/mon-compte/" class="card-footer-item">Mon
-                        compte</a>
+                    <a href="https://www.coworking-metz.fr/mon-compte/"
+                        class="card-footer-item">Compte</a>
                     <a href="https://www.coworking-metz.fr/mon-compte/polaroid/"
-                        class="card-footer-item">Ma photo</a>
-                    <a @click="deconnecter" class="card-footer-item">Déconnexion</a>
+                        class="card-footer-item">Polaroïd</a>
+                    <a @click="deconnecter" class="card-footer-item">Quitter</a>
                 </footer>
             </div>
             <div class="box">
