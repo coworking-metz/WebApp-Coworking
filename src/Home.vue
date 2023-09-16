@@ -5,12 +5,7 @@
             <div class="card mb-5">
                 <div class="card-content">
                     <div class="media">
-                        <a href="https://www.coworking-metz.fr/mon-compte/polaroid/" class="media-left">
-                            <figure class="image is-64x64">
-                                <img
-                                    :src="'https://www.coworking-metz.fr/polaroid/' + auth.id + '.jpg'">
-                            </figure>
-                        </a>
+                        <Polaroid />
                         <div class="media-content">
                             <p class="title is-4">{{ auth.identifiant }}</p>
                             <p class="subtitle is-6"><a
@@ -55,6 +50,7 @@ import { useReglagesStore } from '@/stores/reglages';
 import Portail from '@/components/Portail.vue';
 import Presence from '@/components/Presence.vue';
 import Signal from '@/components/Signal.vue';
+import Polaroid from '@/components/Polaroid.vue';
 import { useApi } from '@/mixins/api';
 
 // Utiliser l'API
@@ -87,11 +83,17 @@ onMounted(async () => {
             // Si une session est disponible, obtenir les détails de la session à partir de l'API
             api.post('app-session').then(response => {
 
-                // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
-                if (!response.session) {
+                if (response.session) {
+                    reglages.reset();
+                    reglages.droits = response.reglages.droits;
+                    reglages.settings = response.reglages.settings;
+                    reglages.admin = response.reglages.admin;
+                } else {
+                    // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
                     console.log('Session invalide');
                     auth.deconnecter();
                     router.push('/login');
+
                 }
             });
         }

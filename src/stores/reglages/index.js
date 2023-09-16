@@ -13,6 +13,7 @@ export const useReglagesStore = defineStore('reglages', {
     settings: {},
     admin: false,
     expires_at: null,
+    divers:{}
   }),
   actions: {
     reset() {
