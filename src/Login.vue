@@ -66,6 +66,7 @@ const connexion = () => {
             // Authentification réussie
             auth.identifiant = response.user.login;
             auth.id = response.user.id;
+            auth.name = response.user.name;
             auth.session = response.user.session_id;
             auth.fresh = true;
 

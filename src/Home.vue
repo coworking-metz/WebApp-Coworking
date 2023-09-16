@@ -7,14 +7,20 @@
                     <div class="media">
                         <Polaroid v-if="data.loaded" />
                         <div class="media-content">
-                            <p class="title is-4">{{ auth.identifiant }}</p>
-                            <p class="subtitle is-6"><a
-                                    href="https://www.coworking-metz.fr/mon-compte/">Mon compte</a>
-                                &middot; <a @click="deconnecter">Se déconnecter</a></p>
+                            <p class="title is-4">{{ auth.name }}</p>
+                            <p class="subtitle is-6">{{ auth.identifiant }}
+                            </p>
                         </div>
                     </div>
 
                 </div>
+                <footer class="card-footer">
+                    <a href="https://www.coworking-metz.fr/mon-compte/" class="card-footer-item">Mon
+                        compte</a>
+                    <a href="https://www.coworking-metz.fr/mon-compte/polaroid/"
+                        class="card-footer-item">Ma photo</a>
+                    <a @click="deconnecter" class="card-footer-item">Déconnexion</a>
+                </footer>
             </div>
             <div class="box">
                 <Portail></Portail>
@@ -86,6 +92,9 @@ onMounted(async () => {
             api.post('app-session').then(response => {
 
                 if (response.session) {
+                    auth.identifiant = response.user.login;
+                    auth.name = response.user.name;
+
                     reglages.reset();
                     reglages.droits = response.reglages.droits;
                     reglages.settings = response.reglages.settings;
@@ -104,10 +113,7 @@ onMounted(async () => {
     }
 });
 const deconnecter = async () => {
-    // Déconnecter l'utilisateur
-    await auth.deconnecter();
-
-    // Rediriger vers la page de connexion
     router.push('/login');
+    await auth.deconnecter();
 }
 </script>

@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({
     identifiant: false,
+    name: false,
     id: false,
     session: false,
     fresh: false
@@ -21,6 +22,7 @@ export const useAuthStore = defineStore('auth', {
       console.log(payload);
       const response = await api.del('app-session', payload);
       this.identifiant = false;
+      this.name = false;
       this.id = false;
       this.session = false;
       this.fresh = false;
