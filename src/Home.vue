@@ -5,7 +5,7 @@
             <div class="card mb-5">
                 <div class="card-content">
                     <div class="media">
-                        <Polaroid />
+                        <Polaroid v-if="data.loaded" />
                         <div class="media-content">
                             <p class="title is-4">{{ auth.identifiant }}</p>
                             <p class="subtitle is-6"><a
@@ -60,7 +60,7 @@ const api = useApi();
 const router = inject('router');
 
 // Créer un objet de données réactif avec une propriété demarrer initialisée à faux
-const data = reactive({ demarrer: false });
+const data = reactive({ demarrer: false, loaded: false });
 
 // Utiliser le store d'authentification
 const auth = useAuthStore();
@@ -72,6 +72,7 @@ const reglages = useReglagesStore();
 onMounted(async () => {
     // Initialiser data.demarrer à faux
     data.demarrer = false;
+    data.loaded = false;
 
     // Si aucune session n'est disponible, redirige vers la page de connexion
     if (!auth.session) {
@@ -79,6 +80,7 @@ onMounted(async () => {
     } else {
         if (auth.fresh) {
             auth.fresh = false;
+            data.loaded = true;
         } else {
             // Si une session est disponible, obtenir les détails de la session à partir de l'API
             api.post('app-session').then(response => {
@@ -88,6 +90,7 @@ onMounted(async () => {
                     reglages.droits = response.reglages.droits;
                     reglages.settings = response.reglages.settings;
                     reglages.admin = response.reglages.admin;
+                    data.loaded = true;
                 } else {
                     // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion
                     console.log('Session invalide');
