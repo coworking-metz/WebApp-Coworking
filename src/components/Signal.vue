@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h3 class="title is-5">Se tenir informé</h3>
+        <!--<h3 class="title is-5">Se tenir informé</h3>-->
 
 
-        <article class="media mt-5">
+        <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
                     <img src="../assets/signal.png" alt="Signal">

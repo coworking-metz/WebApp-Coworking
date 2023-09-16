@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h3 class="title is-5">Occupation de l'espace</h3>
+        <!--<h3 class="title is-5">Occupation de l'espace</h3>-->
 
-        <article class="media mt-5">
+        <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">

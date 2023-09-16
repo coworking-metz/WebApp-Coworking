@@ -1,7 +1,7 @@
 <template>
-    <!-- Titre de la section -->
-    <h3 class="title is-5">Accès</h3>
-    <article class="media mt-5">
+    <!-- Titre de la section 
+    <h3 class="title is-5">Accès</h3>-->
+    <article class="media">
         <figure class="media-left">
             <p class="image is-64x64">
 

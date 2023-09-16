@@ -15,11 +15,10 @@
 
                 </div>
                 <footer class="card-footer">
-                    <a href="https://www.coworking-metz.fr/mon-compte/"
-                        class="card-footer-item">Compte</a>
+                    <a href="https://www.coworking-metz.fr/mon-compte/" class="card-footer-item">Mon
+                        compte</a>
                     <a href="https://www.coworking-metz.fr/mon-compte/polaroid/"
-                        class="card-footer-item">Polaroïd</a>
-                    <a @click="deconnecter" class="card-footer-item">Quitter</a>
+                        class="card-footer-item">Mon polaroïd</a>
                 </footer>
             </div>
             <div class="box">
@@ -30,6 +29,14 @@
             </div>
             <div class="box">
                 <Signal></Signal>
+            </div>
+            <div class="box">
+                <button @click="deconnecter" class="button is-danger" type="button">
+                    <span class="icon is-small">
+                        <i class="fas fa-power-off"></i>
+                    </span><span>Se
+                        déconnecter</span></button>
+
             </div>
         </template>
         <!-- Si data.demarrer est faux, affiche le message de chargement -->
