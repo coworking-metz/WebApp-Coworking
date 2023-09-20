@@ -17,7 +17,7 @@
                 <p class="mb-4 is-7">
                     <!-- Description du bouton d'ouverture du parking -->
                     Déverrouillage du
-                    <a @click="voirPhotoParking">parking voitures de Bliiida</a> pendant
+                    <a @click="voirPhotoParking"><u>parking voitures de Bliiida</u></a> pendant
                     quelques
                     secondes.
                     <b>Cet outil est en phase de beta test</b>

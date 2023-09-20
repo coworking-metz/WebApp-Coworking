@@ -21,7 +21,7 @@
                 <p class="mb-4 is-7">
                     <!-- Description du bouton d'ouverture du portail -->
                     Ce bouton déclenche le déverrouillage du
-                    <a @click="voirPhotoPortail">portail piéton de Bliiida</a> pendant quelques
+                    <a @click="voirPhotoPortail"><u>portail piéton de Bliiida</u></a> pendant quelques
                     secondes.
                 </p>
                 <div class="buttons">
