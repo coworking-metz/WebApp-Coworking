@@ -4,16 +4,12 @@
     <article class="media">
         <figure class="media-left">
             <p class="image is-64x64">
-                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 75.7 94.625"
-                    fill="#f2af10">
-                    <path
-                        d="M40.3 17.1c0-2.3.1-7.9.1-10C47.3 4.9 54.3 2.6 61.2.4c.1 22.3 0 52.8.1 75H45.6c.5-.9.8-1.9.8-3v-5.9c0-2.5-.4-5-1.1-7.4l-1.7-5.8-.3-5.9c0-.7-.1-1.4-.1-2.1 1.7 1 3.5 1.9 5.3 2.6.7.3 1.4.4 2.1.4 1.2 0 2.3-.3 3.2-1 1-.7 1.7-1.6 2.2-2.7 1.2-3-.3-6.3-3.3-7.5-2-.8-4-1.9-5.8-3.1-1.6-1.2-3.1-2.6-4.4-4.1-.6-.7-1.4-1.3-2.3-1.7v-.3c1.2-1.5 1.9-3.4 1.9-5.4s-.5-3.9-1.8-5.4z" />
-                    <path
-                        d="M40.5 39.8c-.1 2.5-.1 5.1 0 7.6l.3 6.3 1.8 6.2c.6 2.1 1 4.3 1 6.6v5.9c0 1.6-1.3 2.9-2.9 2.9h-.3V31.4l.2.2c1.4 1.7 3.1 3.2 4.9 4.5 2 1.4 4.1 2.6 6.4 3.5 1.5.6 2.3 2.3 1.7 3.8-.4 1.2-1.6 1.9-2.7 1.9-.4 0-.7-.1-1.1-.2-2.8-1.1-5.4-2.5-7.7-4.2-.6-.3-1.1-.7-1.6-1.1z" />
-                    <path
-                        d="M51.8 39.7c-2.3-.9-4.4-2.1-6.4-3.5-1.8-1.3-3.4-2.8-4.9-4.5-.6-.7-1.4-1-2.3-1h-7.5c-.8-.1-1.5-.1-2.3 0-5.1.6-8.1 5-9.7 7.3-1.7 2.4-2.9 5.1-3.6 8-.4 1.6.6 3.2 2.1 3.6.2.1.5.1.7.1 1.3 0 2.5-.9 2.8-2.2.6-2.2 1.5-4.3 2.7-6.1.8-1.2 2-2.9 3.4-3.9.3 4.9.3 9.8-.1 14.6l-.1 1.7-1 4c-.7 2.6-2.1 5-4.1 6.7l-3.2 2.8c-1.2 1.1-1.3 2.9-.3 4.1 1.1 1.2 2.9 1.3 4.1.3l3.2-2.8c2.9-2.6 5-5.9 6-9.7l.5-2h3.9l1.3 4.4c.5 1.6.7 3.2.7 4.9v5.9c0 1.6 1.3 2.9 2.9 2.9 1.6 0 2.9-1.3 2.9-2.9v-5.9c0-2.2-.3-4.4-1-6.6l-1.8-6.2-.3-6.2c-.1-2.5-.1-5.1 0-7.7.5.4.9.7 1.4 1.1 2.4 1.7 5 3.2 7.7 4.2.3.1.7.2 1.1.2 1.2 0 2.3-.7 2.7-1.9.8-1.4 0-3.1-1.5-3.7z" />
-                    <circle cx="33.5" cy="22.5" r="5.9" />
+
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 100 125">
+                    <path fill="#f2af10"
+                        d="M5.967 15.5v69h7v-38h16.32l-1.68 6.999h-3.641c-1.65 0-3 1.35-3 3s1.35 3 3 3h2.037c-2.441 1.828-4.037 4.733-4.037 8v9h4v8h9v-7h30v7h9v-8h4v-9c0-3.267-1.594-6.172-4.037-8h2.037c1.65 0 3-1.35 3-3s-1.35-3-3-3h-4.639l-1.68-6.999h17.385v38h7v-69H5.967zm81.066 7v9h-6.066V30a1.5 1.5 0 0 0-3 0v1.5h-56V30a1.5 1.5 0 0 0-3 0v1.5h-6v-9h74.066zM30.967 72.499a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm42-4a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-8.36-13H34.326l2.16-8.999h25.963l2.158 8.999zM80.967 43.5V42a1.5 1.5 0 0 0-3 0v1.5h-56V42a1.5 1.5 0 0 0-3 0v1.5h-6v-9h74.066v9h-6.066z" />
                 </svg>
+
 
             </p>
         </figure>
@@ -21,25 +17,26 @@
             <div class="content">
 
                 <p class="mb-4 is-7">
-                    <!-- Description du bouton d'ouverture du portail -->
-                    Ce bouton déclenche le déverrouillage du
-                    <a @click="voirPhotoPortail">portail piéton de Bliiida</a> pendant quelques
+                    <!-- Description du bouton d'ouverture du parking -->
+                    Déverrouillage du
+                    <a @click="voirPhotoParking">parking voitures de Bliiida</a> pendant
+                    quelques
                     secondes.
                 </p>
                 <div class="buttons">
-                    <!-- Bouton d'ouverture du portail -->
+                    <!-- Bouton d'ouverture du parking -->
                     <button class="button is-link"
-                        :class="{ 'is-loading': data.loading, 'is-success': data.portail_ouvert }"
-                        @click="ouvrirPortail">
+                        :class="{ 'is-loading': data.loading, 'is-success': data.parking_ouvert }"
+                        @click="ouvrirParking">
                         <span class="icon is-small">
                             <i class="fas" :class="'fa-' + data.icone"></i>
                         </span>
                         <span>
-                            {{ data.message_portail }}
+                            {{ data.message_parking }}
                         </span>
                     </button>
                     <template v-if="reglages.admin">
-                        <router-link to="/admin/log?type=portail">Historique des
+                        <router-link to="/admin/log?type=parking">Historique des
                             accès</router-link>
                     </template>
                 </div>
@@ -47,10 +44,10 @@
         </div>
     </article>
 
-    <!-- Affichage de la photo du portail -->
-    <div v-if="data.afficher_porte_portail" id="photo-portail"
-        @click="data.afficher_porte_portail = false">
-        <img src="../assets/portail.png" />
+    <!-- Affichage de la photo du parking -->
+    <div v-if="data.afficher_porte_parking" id="photo-parking"
+        @click="data.afficher_porte_parking = false">
+        <img src="../assets/parking.jpg" />
         <a>Fermer</a>
     </div>
 </template>
@@ -68,45 +65,45 @@ const reglages = useReglagesStore();
 const data = reactive({
     icone: 'key',
     loading: false, // Indicateur de chargement
-    portail_ouvert: false, // Indicateur de déverrouillage du portail
-    message_portail: 'Ouvrir le portail', // Message du bouton d'ouverture du portail
-    afficher_porte_portail: false, // Indicateur d'affichage de la photo du portail
+    parking_ouvert: false, // Indicateur de déverrouillage du parking
+    message_parking: 'Ouvrir le parking', // Message du bouton d'ouverture du parking
+    afficher_porte_parking: false, // Indicateur d'affichage de la photo du parking
 });
 
-// Fonction pour gérer l'ouverture du portail
-const portailOuvert = (message) => {
-    data.message_portail = message;
-    data.portail_ouvert = true;
+// Fonction pour gérer l'ouverture du parking
+const parkingOuvert = (message) => {
+    data.message_parking = message;
+    data.parking_ouvert = true;
     data.icone = 'door-open';
 
     // Réinitialisation de l'état après quelques secondes
     setTimeout(() => {
-        data.message_portail = 'Ouvrir le portail';
-        data.portail_ouvert = false;
+        data.message_parking = 'Ouvrir le parking';
+        data.parking_ouvert = false;
         data.icone = 'key';
     }, 3000);
 
-    logOuverture(); // Enregistrement de l'ouverture du portail
+    logOuverture(); // Enregistrement de l'ouverture du parking
 };
 
-// Fonction pour ouvrir le portail
-const ouvrirPortail = () => {
+// Fonction pour ouvrir le parking
+const ouvrirParking = () => {
     // Vérification des droits de l'utilisateur
-    if (!reglages.droit('ouvrir_portail')) {
-        return alert('Vous ne pouvez pas ouvrir le portail.');
+    if (!reglages.droit('ouvrir_parking')) {
+        return alert('Vous ne pouvez pas ouvrir le parking.');
     }
 
-    const url = 'https://tickets.coworking-metz.fr/api/interphone';
+    const url = 'https://tickets.coworking-metz.fr/api/parking';
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
-    const message = 'Portail ouvert';
+    const message = 'Parking ouvert';
 
     // if (import.meta.env.VITE_ENV == 'DEV') {
-    //     return portailOuvert(message);
+    //     return parkingOuvert(message);
     // }
 
     data.loading = true;
 
-    // Appel à l'API pour ouvrir le portail
+    // Appel à l'API pour ouvrir le parking
     fetch(url, {
         method: 'POST',
         headers: {
@@ -117,7 +114,7 @@ const ouvrirPortail = () => {
     })
         .then((response) => response.json())
         .then((responseBody) => {
-            portailOuvert(message);
+            parkingOuvert(message);
         })
         .catch((error) => {
             console.error(error);
@@ -127,7 +124,7 @@ const ouvrirPortail = () => {
         });
 };
 
-// Fonction pour enregistrer l'ouverture du portail dans la base de données
+// Fonction pour enregistrer l'ouverture du parking dans la base de données
 function logOuverture() {
     // if (import.meta.env.VITE_ENV == 'DEV') return;
 
@@ -147,7 +144,7 @@ function logOuverture() {
                     ID.unique(),
                     {
                         id: auth.id,
-                        typeLog: 'portail',
+                        typeLog: 'parking',
                         identifiant: auth.identifiant,
                         date: new Date().toISOString(),
                     },
@@ -167,15 +164,21 @@ function logOuverture() {
     }
 }
 
-// Fonction pour afficher la photo du portail
-const voirPhotoPortail = () => {
-    data.afficher_porte_portail = true;
-    console.log(data.afficher_porte_portail);
+// Fonction pour afficher la photo du parking
+const voirPhotoParking = () => {
+    data.afficher_porte_parking = true;
+    console.log(data.afficher_porte_parking);
 };
 </script>
 
 <style>
-#photo-portail {
+#photo-parking img {
+    max-width: 60%;
+    max-height: 60%;
+    object-fit: contain;
+}
+
+#photo-parking {
     position: fixed;
     inset: 0;
     z-index: 1000;

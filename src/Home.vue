@@ -25,6 +25,9 @@
                 <Portail></Portail>
             </div>
             <div class="box">
+                <Parking></Parking>
+            </div>
+            <div class="box">
                 <Presence></Presence>
             </div>
             <div class="box">
@@ -61,6 +64,7 @@ import { reactive, onMounted, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useReglagesStore } from '@/stores/reglages';
 import Portail from '@/components/Portail.vue';
+import Parking from '@/components/Parking.vue';
 import Presence from '@/components/Presence.vue';
 import Signal from '@/components/Signal.vue';
 import Polaroid from '@/components/Polaroid.vue';
