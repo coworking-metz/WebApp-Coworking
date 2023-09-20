@@ -128,3 +128,9 @@ const deconnecter = async () => {
     await auth.deconnecter();
 }
 </script>
+
+<style>
+.box:empty {
+    display: none;
+}
+</style>

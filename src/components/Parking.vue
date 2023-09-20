@@ -1,7 +1,5 @@
 <template>
-    <!-- Titre de la section 
-    <h3 class="title is-5">Accès</h3>-->
-    <article class="media">
+    <article class="media" v-if="reglages.droit('ouvrir_parking')">
         <figure class="media-left">
             <p class="image is-64x64">
 
@@ -46,7 +44,6 @@
         </div>
     </article>
 
-    <!-- Affichage de la photo du parking -->
     <div v-if="data.afficher_porte_parking" id="photo-parking"
         @click="data.afficher_porte_parking = false">
         <img src="../assets/parking.jpg" />
