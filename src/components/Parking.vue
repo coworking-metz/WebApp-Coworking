@@ -22,6 +22,7 @@
                     <a @click="voirPhotoParking">parking voitures de Bliiida</a> pendant
                     quelques
                     secondes.
+                    <b>Cet outil est en phase de beta test</b>
                 </p>
                 <div class="buttons">
                     <!-- Bouton d'ouverture du parking -->
@@ -40,6 +41,7 @@
                             accès</router-link>
                     </template>
                 </div>
+
             </div>
         </div>
     </article>
