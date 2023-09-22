@@ -4,7 +4,7 @@
     </div>
     <div class="box">
         <h2 class="title">Historique des accès</h2>
-        <p class="subtitle">Affichage des 100 derniers accès au {{ data.type }}</p>
+        <p class="subtitle">Affichage des 100 derniers accès au {{ route.query.type }}</p>
         <entree class="media" v-for="entree in data.entrees" :entree="entree"></entree>
     </div>
 </template>
@@ -12,7 +12,7 @@
 import Entree from '@/components/Entree.vue';
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
-import { Client, Databases, Query } from "appwrite";
+import { Client, Databases, Query, ID } from "appwrite";
 const route = useRoute();
 
 const data = reactive({
@@ -23,17 +23,24 @@ const data = reactive({
 
 
 onMounted(() => {
-    data.type = route.query.type;
+
+    if (route.query.type == 'parking')
+        data.type = 2;
+    else
+        if (route.query.type == 'portail')
+            data.type = 1;
+
+    if (!data.type) return;
 
     const client = new Client();
 
     const databases = new Databases(client);
 
-    client.setEndpoint('https://cloud.appwrite.io/v1').setProject('649e7e3da8c96ebabae2');
+    client.setEndpoint('https://cloud.appwrite.io/v1').setProject(import.meta.env.VITE_APPWRITE_PROJECT);
 
     const promise = databases.listDocuments(
-        '649e813690066fa29250',
-        '649e8141b7c115fc1fd6',
+        import.meta.env.VITE_APPWRITE_DATABASE,
+        import.meta.env.VITE_APPWRITE_COLLECTION,
         [
             Query.orderDesc('date'),
             Query.limit(100),
@@ -45,5 +52,8 @@ onMounted(() => {
         data.entrees = response.documents;
     });
 });
+
+
+
 </script>
     

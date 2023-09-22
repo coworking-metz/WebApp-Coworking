@@ -132,18 +132,18 @@ function logOuverture() {
         const account = new Account(client);
         const databases = new Databases(client);
 
-        client.setEndpoint('https://cloud.appwrite.io/v1').setProject('649e7e3da8c96ebabae2');
+        client.setEndpoint('https://cloud.appwrite.io/v1').setProject(import.meta.env.VITE_APPWRITE_PROJECT);
 
         account
             .createEmailSession('contact@coworking-metz.fr', import.meta.env.VITE_APPWRITE_PASSWORD)
             .then(() => {
                 const promise = databases.createDocument(
-                    '649e813690066fa29250',
-                    '649e8141b7c115fc1fd6',
+                    import.meta.env.VITE_APPWRITE_DATABASE,
+                    import.meta.env.VITE_APPWRITE_COLLECTION,
                     ID.unique(),
                     {
                         id: auth.id,
-                        typeLog: 'parking',
+                        typeLog: 2,
                         identifiant: auth.identifiant,
                         date: new Date().toISOString(),
                     },

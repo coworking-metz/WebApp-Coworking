@@ -12,7 +12,8 @@
             <div class="media-content">
                 <div class="content">
                     <p class="is-7">
-                        Rejoignez le groupe <a href="https://signal.org/fr/download/">Signal</a> pour
+                        Rejoignez le groupe <a href="https://signal.org/fr/download/"><b>Signal</b></a>
+                        pour
                         recevoir des
                         infos pratiques autour du lieu et de l'assocation.
                     </p> <a
