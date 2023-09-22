@@ -1,7 +1,12 @@
 <template>
     <form class="box" @submit.prevent="connexion">
-        <h2 class="title">Coworking App</h2>
-        <p class="subtitle">Connectez-vous avec votre identifiant Coworking</p>
+        <h2 class="title">Application Compagnon Coworking</h2>
+        <p class="subtitle">Connectez-vous avec votre identifiant Coworking.<br><small>Pour en savoir
+                plus sur ce
+                service, veuillez consulter la <a
+                    href="https://www.coworking-metz.fr/application-compagnon-coworking/"><u>page de
+                        présentation de
+                        cette application</u></a>.</small></p>
 
         <div class="field">
             <label class="label" for="email">Email</label>
