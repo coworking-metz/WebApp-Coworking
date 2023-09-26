@@ -15,14 +15,18 @@
             <div class="content">
 
                 <p class="mb-4 is-7">
-                    <!-- Description du bouton d'ouverture du parking -->
+                    <b style="color:red">En panne</b>
+                <p style="color:red">Le système d'ouverture à distance du parking est en panne et sera
+                    réparé très
+                    prochainement</p>
+                <!--
                     Déverrouillage du
                     <a @click="voirPhotoParking"><u>parking voitures de Bliiida</u></a> pendant
                     quelques
                     secondes.
-                    <b>Cet outil est en phase de beta test</b>
+                    <b>Cet outil est en phase de beta test</b>-->
                 </p>
-                <div class="buttons">
+                <div class="buttons" v-show="false">
                     <!-- Bouton d'ouverture du parking -->
                     <button class="button is-link"
                         :class="{ 'is-loading': data.loading, 'is-success': data.parking_ouvert }"
