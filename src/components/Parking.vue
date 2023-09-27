@@ -132,9 +132,6 @@ const ouvrirParking = () => {
     if (!reglages.droit('ouvrir_parking')) {
         return alert('Vous ne pouvez pas ouvrir le parking.');
     }
-    parkingOuvert();
-
-    return;
     const url = 'https://tickets.coworking-metz.fr/api/parking';
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
 
