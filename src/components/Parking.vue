@@ -20,7 +20,6 @@
                     <a @click="voirPhotoParking"><u>parking voitures de Bliiida</u></a> pendant
                     quelques
                     secondes.
-                    <b>Cet outil est en phase de beta test</b>
                 </p>
                 <div class="buttons">
                     <!-- Bouton d'ouverture du parking -->
@@ -33,12 +32,15 @@
                         <span>
                             {{ data.message_parking }}
                         </span>
+                        <i class="progression"
+                            :style="{ width: data.progression + '%', 'transition': data.duration ? 'width ' + data.duration + 's ease' : '' }"></i>
                     </button>
                     <template v-if="reglages.admin">
                         <router-link to="/admin/log?type=parking">Historique des
                             accès</router-link>
                     </template>
                 </div>
+                <b>Cet outil est en phase de beta test, des perturbations peuvent survenir</b>
 
             </div>
         </div>
@@ -62,6 +64,13 @@ const reglages = useReglagesStore();
 
 // État réactif du composant
 const data = reactive({
+    progression: 0,
+    duration: 0,
+    durees: {
+        ouverture: 45,
+        ouvert: 45,
+        fermeture: 45
+    },
     icone: 'key',
     loading: false, // Indicateur de chargement
     parking_ouvert: false, // Indicateur de déverrouillage du parking
@@ -69,18 +78,50 @@ const data = reactive({
     afficher_porte_parking: false, // Indicateur d'affichage de la photo du parking
 });
 
+const demarrerProgression = (duration) => {
+    data.duration = 0;
+    data.progression = 100;
+    setTimeout(() => {
+        data.duration = duration - 1;
+        setTimeout(() => {
+            data.progression = 0;
+        }, 500);
+    }, 500);
+}
+
 // Fonction pour gérer l'ouverture du parking
 const parkingOuvert = (message) => {
-    data.message_parking = message;
+    data.message_parking = 'Ouverture du parking en cours';
     data.parking_ouvert = true;
     data.icone = 'door-open';
 
-    // Réinitialisation de l'état après quelques secondes
+    demarrerProgression(data.durees.ouverture);
     setTimeout(() => {
-        data.message_parking = 'Ouvrir le parking';
-        data.parking_ouvert = false;
-        data.icone = 'key';
-    }, 3000);
+        data.message_parking = 'Le parking est ouvert';
+        data.icone = 'check';
+        demarrerProgression(data.durees.ouvert);
+
+        setTimeout(() => {
+            data.message_parking = 'Fermeture du parking en cours';
+            data.icone = 'door-closed';
+            demarrerProgression(data.durees.fermeture);
+
+            setTimeout(() => {
+                data.message_parking = 'Ouvrir le parking';
+                data.parking_ouvert = false;
+                data.icone = 'key';
+            }, data.durees.fermeture * 1000);
+
+        }, data.durees.ouvert * 1000);
+
+    }, data.durees.ouverture * 1000);
+
+    // // Réinitialisation de l'état après quelques secondes
+    // setTimeout(() => {
+    //     data.message_parking = 'Ouvrir le parking';
+    //     data.parking_ouvert = false;
+    //     data.icone = 'key';
+    // }, 3000);
 
     logOuverture(); // Enregistrement de l'ouverture du parking
 };
@@ -91,10 +132,11 @@ const ouvrirParking = () => {
     if (!reglages.droit('ouvrir_parking')) {
         return alert('Vous ne pouvez pas ouvrir le parking.');
     }
+    parkingOuvert();
 
+    return;
     const url = 'https://tickets.coworking-metz.fr/api/parking';
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
-    const message = 'Parking ouvert';
 
     // if (import.meta.env.VITE_ENV == 'DEV') {
     //     return parkingOuvert(message);
@@ -108,12 +150,11 @@ const ouvrirParking = () => {
         headers: {
             Authorization: `Token ${token}`,
             'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
+        }
     })
         .then((response) => response.json())
         .then((responseBody) => {
-            parkingOuvert(message);
+            parkingOuvert();
         })
         .catch((error) => {
             console.error(error);
@@ -188,5 +229,20 @@ const voirPhotoParking = () => {
     justify-content: center;
     padding: 1rem;
     flex-direction: column;
+}
+
+.button:has(.progression) span {
+    position: relative;
+    z-index: 1;
+}
+
+.button .progression {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 0;
 }
 </style>
