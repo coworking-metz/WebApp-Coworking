@@ -1,24 +1,37 @@
-import { defineStore } from 'pinia';
-import { useApi } from '@/mixins/api.js';
-import { useAuthStore } from '@/stores/auth';
-import { afterOneHour } from '@/mixins/utils.js';
-import { addMonths } from 'date-fns'; // Import the addMonths function
+import { defineStore } from "pinia";
+import { useApi } from "@/mixins/api.js";
+import { useAuthStore } from "@/stores/auth";
+import { afterOneHour } from "@/mixins/utils.js";
+import { addMonths } from "date-fns"; // Import the addMonths function
 
 const api = useApi();
 
-export const useReglagesStore = defineStore('reglages', {
+export const useReglagesStore = defineStore("reglages", {
   persist: true,
   state: () => ({
     droits: {},
     settings: {},
     admin: false,
     expires_at: null,
-    divers:{}
+    divers: {},
+    guest: false,
+    visite: false,
   }),
   actions: {
+    set(reglages) {
+      this.reset();
+      this.guest = reglages.guest;
+      this.visite = reglages.visite;
+      this.droits = reglages.droits;
+      this.settings = reglages.settings;
+      this.admin = reglages.admin;
+    },
+
     reset() {
       // reset state
       this.droits = {};
+      this.guest = false;
+      this.visite = false;
       this.settings = {};
       this.admin = false;
       this.setExpiry();
@@ -45,14 +58,11 @@ export const useReglagesStore = defineStore('reglages', {
     getDroits() {
       if (this.checkExpiry()) return Promise.resolve();
 
-
-      return api.post('app-droits', { user_id: this.id }).then((data) => {
-        console.log('Droits chargés');
+      return api.post("app-droits", { user_id: this.id }).then((data) => {
+        console.log("Droits chargés");
         this.droits = data.droits;
         this.settings = data.settings;
         this.admin = data.admin;
-
-
       });
     },
     // getSettings() {

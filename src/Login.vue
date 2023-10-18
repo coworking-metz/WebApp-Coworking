@@ -68,17 +68,9 @@ const connexion = () => {
     };
     api.post('app-auth', payload).then((response) => {
         if (response.user) {
-            // Authentification réussie
-            auth.identifiant = response.user.login;
-            auth.id = response.user.id;
-            auth.name = response.user.name;
-            auth.session = response.user.session_id;
-            auth.fresh = true;
+            auth.set(response.user)
+            reglages.set(response.reglages)
 
-            reglages.reset();
-            reglages.droits = response.reglages.droits;
-            reglages.settings = response.reglages.settings;
-            reglages.admin = response.reglages.admin;
             router.push('/'); // Redirection vers la page d'accueil
         } else if (response?.code) {
             // Gestion des erreurs d'authentification

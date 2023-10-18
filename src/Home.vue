@@ -8,32 +8,32 @@
                         <Polaroid v-if="data.loaded" />
                         <div class="media-content">
                             <p class="title is-4">{{ auth.name }}</p>
-                            <p class="subtitle is-6">{{ auth.identifiant }}
-                            </p>
+                            <p class="subtitle is-6">{{ auth.identifiant }}</p>
                         </div>
                     </div>
 
                 </div>
-                <footer class="card-footer">
+                <footer class="card-footer" v-if="!reglages.guest">
                     <a href="https://www.coworking-metz.fr/mon-compte/" class="card-footer-item">Mon
                         compte</a>
                     <a href="https://www.coworking-metz.fr/mon-compte/polaroid/"
                         class="card-footer-item">Mon polaroïd</a>
                 </footer>
             </div>
+            <div class="box" v-if="reglages.guest">Visite prévue le {{ reglages.visite }}</div>
             <div class="box">
                 <Portail></Portail>
             </div>
             <div class="box">
                 <Parking></Parking>
             </div>
-            <div class="box">
+            <div class="box" v-if="!reglages.guest">
                 <Presence></Presence>
             </div>
-            <div class="box">
+            <div class="box" v-if="!reglages.guest">
                 <Signal></Signal>
             </div>
-            <div class="box">
+            <div class="box" v-if="!reglages.guest">
                 <button @click="deconnecter" class="button is-danger" type="button">
                     <span class="icon is-small">
                         <i class="fas fa-power-off"></i>
@@ -103,13 +103,15 @@ onMounted(async () => {
             api.post('app-session').then(response => {
 
                 if (response.session) {
-                    auth.identifiant = response.user.login;
-                    auth.name = response.user.name;
+                    // auth.identifiant = response.user.login;
+                    // auth.name = response.user.name;
+                    auth.set(response.user)
 
-                    reglages.reset();
-                    reglages.droits = response.reglages.droits;
-                    reglages.settings = response.reglages.settings;
-                    reglages.admin = response.reglages.admin;
+                    // reglages.reset();
+                    // reglages.droits = response.reglages.droits;
+                    // reglages.settings = response.reglages.settings;
+                    // reglages.admin = response.reglages.admin;
+                    reglages.set(response.reglages);
                     data.loaded = true;
                 } else {
                     // Si les données de session ne sont pas disponibles, se déconnecter et rediriger vers la connexion

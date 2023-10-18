@@ -4,15 +4,18 @@
             <img :src="polaroid_url">
         </figure>
     </a>
+    <template v-if="!reglages.guest">
 
-    <div v-if="notif_ouverte" class="notification is-info">
-        <button class="delete" @click="fermer"></button>
-        <b>Nouveau polaroïd disponible !</b>
-        <p>Votre profil est incomplet. <a href="/mon-compte/polaroid/?modifier">Ajoutez une photo dans
-                votre compte pour
-                profiter du nouveau format de
-                polaroïd</a>.</p>
-    </div>
+        <div v-if="notif_ouverte" class="notification is-info">
+            <button class="delete" @click="fermer"></button>
+            <b>Nouveau polaroïd disponible !</b>
+            <p>Votre profil est incomplet. <a href="/mon-compte/polaroid/?modifier">Ajoutez une photo
+                    dans
+                    votre compte pour
+                    profiter du nouveau format de
+                    polaroïd</a>.</p>
+        </div>
+    </template>
 </template>
 <script setup>
 import { computed } from 'vue';
