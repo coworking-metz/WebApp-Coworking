@@ -93,7 +93,7 @@ const ouvrirPortail = () => {
         return alert('Vous ne pouvez pas ouvrir le portail.');
     }
 
-    const url = 'https://tickets.coworking-metz.fr/api/interphone';
+    const url = import.meta.env.VITE_API_TICKETS + '/interphone';
     const token = import.meta.env.VITE_APP_PORTAIL_TOKEN;
     const message = 'Portail ouvert';
 
