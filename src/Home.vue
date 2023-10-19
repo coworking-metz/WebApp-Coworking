@@ -5,10 +5,11 @@
             <div class="card mb-5">
                 <div class="card-content">
                     <div class="media">
-                        <Polaroid v-if="data.loaded" />
+                        <Polaroid v-if="!reglages.guest && data.loaded" />
                         <div class="media-content">
                             <p class="title is-4">{{ auth.name }}</p>
-                            <p class="subtitle is-6">{{ auth.identifiant }}</p>
+                            <p class="subtitle is-6">{{ reglages.guest ? 'Visiteur' : auth.identifiant
+                            }}</p>
                         </div>
                     </div>
 
