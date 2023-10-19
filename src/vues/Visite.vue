@@ -34,7 +34,7 @@ onMounted(() => {
                     } else if (response?.code) {
                         // Gestion des erreurs d'authentification
                         alert(response.message);
-                        router.push('/');
+                        // router.push('/');
                     }
                 });
             } else {

@@ -21,20 +21,34 @@
                         class="card-footer-item">Mon polaroïd</a>
                 </footer>
             </div>
-            <div class="box" v-if="reglages.guest">Visite prévue le {{ reglages.visite }}</div>
+            <div class="box" v-if="reglages.guest">
+                <template v-if="reglages.visite.isToday">
+                    Votre visite à lieu <strong>aujourd'hui à {{ heureVisite }}.</strong>
+                </template>
+                <template v-else>
+                    <p>Visite prévue le <strong>{{ reglages.visite.dateFr }}</strong>.</p>
+                    <p>Utilisez cette application le jour de votre visite pour avoir accès au
+                        <strong>coworking</strong>
+                        et au <strong>parking voitures</strong>.
+                    </p>
+                </template>
+            </div>
+            <template v-if="afficherActions">
+                <div class="box">
+                    <Portail />
+                </div>
+                <div class="box">
+                    <Parking />
+                </div>
+                <div class="box" v-if="!reglages.guest">
+                    <Presence />
+                </div>
+                <div class="box" v-if="!reglages.guest">
+                    <Signal />
+                </div>
+            </template>
+            <Plan />
             <div class="box">
-                <Portail></Portail>
-            </div>
-            <div class="box">
-                <Parking></Parking>
-            </div>
-            <div class="box" v-if="!reglages.guest">
-                <Presence></Presence>
-            </div>
-            <div class="box" v-if="!reglages.guest">
-                <Signal></Signal>
-            </div>
-            <div class="box" v-if="!reglages.guest">
                 <button @click="deconnecter" class="button is-danger" type="button">
                     <span class="icon is-small">
                         <i class="fas fa-power-off"></i>
@@ -61,10 +75,11 @@
 
 <script setup>
 // Importation des packages et composants nécessaires
-import { reactive, onMounted, inject } from 'vue';
+import { reactive, onMounted, inject, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useReglagesStore } from '@/stores/reglages';
 import Portail from '@/components/Portail.vue';
+import Plan from '@/components/Plan.vue';
 import Parking from '@/components/Parking.vue';
 import Presence from '@/components/Presence.vue';
 import Signal from '@/components/Signal.vue';
@@ -86,6 +101,15 @@ const auth = useAuthStore();
 // Utiliser le store des settings
 const reglages = useReglagesStore();
 
+const afficherActions = computed(() => {
+    if (!reglages.guest) return true;
+    if (reglages.visite?.isToday) return true;
+})
+
+const heureVisite = computed(() => {
+    const date = new Date(reglages.visite.date);
+    return date.toTimeString().split(' ')[0].slice(0, 5);
+})
 // Lorsque le composant est monté
 onMounted(async () => {
     // Initialiser data.demarrer à faux
