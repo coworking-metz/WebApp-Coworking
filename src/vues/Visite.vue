@@ -1,4 +1,11 @@
-<template></template>
+<template>
+    <div class="box">
+        <div align="center">
+            <p>Chargement en cours</p>
+            <button class="button is-loading" style="border: 0" type="button"></button>
+        </div>
+    </div>
+</template>
 <script setup>
 import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
