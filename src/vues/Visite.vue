@@ -16,30 +16,33 @@ const router = useRouter()
 
 onMounted(() => {
     if (route.query.visite) {
-        const user_id = route.query.visite;
-        sha1(user_id + import.meta.env.VITE_APP_AUTH_TOKEN).then(hash => {
-            if (hash == route.query.check) {
-                const payload = {
-                    user_id: user_id,
-                    check: hash,
-                };
 
-                api.post('app-auth', payload).then((response) => {
+        auth.deconnecter().then(() => {
+            const user_id = route.query.visite;
+            sha1(user_id + import.meta.env.VITE_APP_AUTH_TOKEN).then(hash => {
+                if (hash == route.query.check) {
+                    const payload = {
+                        user_id: user_id,
+                        check: hash,
+                    };
 
-                    if (response.user) {
-                        auth.set(response.user)
-                        reglages.set(response.reglages)
+                    api.post('app-auth', payload).then((response) => {
 
-                        router.push('/'); // Redirection vers la page d'accueil
-                    } else if (response?.code) {
-                        // Gestion des erreurs d'authentification
-                        alert(response.message);
-                        // router.push('/');
-                    }
-                });
-            } else {
-                document.location.href = 'https://coworking-metz.fr';
-            }
+                        if (response.user) {
+                            auth.set(response.user)
+                            reglages.set(response.reglages)
+
+                            router.push('/'); // Redirection vers la page d'accueil
+                        } else if (response?.code) {
+                            // Gestion des erreurs d'authentification
+                            alert(response.message);
+                            // router.push('/');
+                        }
+                    });
+                } else {
+                    document.location.href = 'https://coworking-metz.fr';
+                }
+            })
         })
     }
 })
