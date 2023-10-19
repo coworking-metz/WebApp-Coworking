@@ -1,6 +1,7 @@
 <template>
     <div class="box">
-        <img onclick="window.open(this.src, 'plan');" src="@/assets/plan.png">
+        <a href="https://www.coworking-metz.fr/wp-content/uploads/2023/10/plan.png" target="_blank"><img
+                src="https://www.coworking-metz.fr/wp-content/uploads/2023/10/plan.png"></a>
     </div>
 </template>
 
