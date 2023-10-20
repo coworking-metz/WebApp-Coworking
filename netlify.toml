@@ -6,7 +6,6 @@
   from = "/favicon.ico"
   to = "https://coworking-metz/favicon/favicon.ico"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/*"
