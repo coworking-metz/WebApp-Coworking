@@ -69,18 +69,28 @@ export function useApi() {
         options.body = payload;
       }
 
-      const auth = useAuthStore();
-      if (auth.session) {
-        options.body = options.body || {};
-        options.body.user_id = auth.id;
-        options.body.session = auth.session;
-      }
-
       let url = uri;
       if (!uri.includes("http")) {
         url = import.meta.env.VITE_WP_API_ROOT + uri;
+        const auth = useAuthStore();
+        if (auth.session) {
+          if (options.method == "GET") {
+            if (!uri.includes("?")) {
+              uri += "?";
+            } else {
+              uri += "&";
+            }
+            uri += `?${objectToQueryString({
+              user_id: auth.id,
+              session: auth.session,
+            })}`;
+          } else {
+            options.body = options.body || {};
+            options.body.user_id = auth.id;
+            options.body.session = auth.session;
+          }
+        }
       }
-
       options.body = JSON.stringify(options.body);
       const response = await fetch(url, options);
       return response;

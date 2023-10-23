@@ -37,7 +37,8 @@
                             </template>
                         </template>
                     </p>
-
+                    <button class="button is-small is-link" :class="{ 'is-loading': data.loading }"
+                        @click="refreshPresence">Rafraichir</button>
                     <template v-if="reglages.admin">
                         <p class="mt-3">
                             <a href="https://storied-speculoos-d61724.netlify.app/">
@@ -52,11 +53,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, reactive } from 'vue';
 import { useReglagesStore } from '@/stores/reglages';
+import { useApi } from '@/mixins/api';
+const api = useApi();
 const reglages = useReglagesStore();
 
-
+const data = reactive({
+    loading: false
+})
 const taux = computed(() => {
     return Math.round(reglages.settings.occupation.presents / reglages.settings.occupation.total * 100);
 });
@@ -72,4 +77,15 @@ const dashoffset = computed(() => {
     const dashOffset = circumference - tauxDecimal * circumference;
     return dashOffset;
 });
+
+function refreshPresence() {
+    data.loading = true;
+    api.post('app-droits').then((response) => {
+        reglages.set(response)
+        data.loading = false;
+    })
+}
+onMounted(() => {
+    // refreshPresence()
+})
 </script>
