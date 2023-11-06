@@ -86,6 +86,6 @@ function refreshPresence() {
     })
 }
 onMounted(() => {
-    // refreshPresence()
+    setTimeout(refreshPresence, 2000);
 })
 </script>
