@@ -27,14 +27,18 @@
                             v-if="!reglages.settings.occupation || !reglages.settings.occupation.presents">Le
                             coworking est vide !</template>
                         <template v-else>
-                            <template v-if="reglages.settings.occupation.presents == 1">
+                            <template v-if="presents == 1">
                                 1 poste occupé sur les {{ reglages.settings.occupation.total }}
                                 disponibles
                             </template>
                             <template v-else>
-                                {{ reglages.settings.occupation.presents }} postes occupés sur les
-                                {{ reglages.settings.occupation.total }} disponibles.
+                                {{ presents }} postes occupés sur les
+                                {{ reglages.settings.occupation.total }} disponibles
                             </template>
+                            <template v-if="reglages.settings.occupation.visites">
+                                (dont {{ reglages.settings.occupation.visites }} journée{{
+                                    reglages.settings.occupation.visites > 1 ? 's' : '' }}
+                                d'essai)</template>
                         </template>
                     </p>
                     <button class="button is-small is-link" :class="{ 'is-loading': data.loading }"
@@ -65,7 +69,9 @@ const data = reactive({
 const taux = computed(() => {
     return Math.round(reglages.settings.occupation.presents / reglages.settings.occupation.total * 100);
 });
-
+const presents = computed(() => {
+    return reglages.settings.occupation.presents + reglages.settings.occupation.visites;
+})
 const dasharray = computed(() => {
     const circumference = 2 * Math.PI * 80;
     return circumference;
