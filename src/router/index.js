@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/Home.vue"; // Importing Home component
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      component: () => import("@/Home.vue"),
+      component: Home,
     },
     {
       path: "/login",
