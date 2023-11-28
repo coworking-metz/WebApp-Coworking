@@ -13,34 +13,43 @@
         </figure>
         <div class="media-content">
             <div class="content">
+                <template v-if="parkingActif">
 
-                <p class="mb-4 is-7">
-                    <!-- Description du bouton d'ouverture du parking -->
-                    Déverrouillage du
-                    <a @click="voirPhotoParking"><u>parking voitures de Bliiida</u></a> pendant
-                    quelques
-                    secondes.
-                </p>
-                <div class="buttons">
-                    <!-- Bouton d'ouverture du parking -->
-                    <button class="button is-link"
-                        :class="{ 'is-loading': data.loading, 'is-success': data.parking_ouvert }"
-                        @click="ouvrirParking">
-                        <span class="icon is-small">
-                            <i class="fas" :class="'fa-' + data.icone"></i>
-                        </span>
-                        <span>
-                            {{ data.message_parking }}
-                        </span>
-                        <i class="progression"
-                            :style="{ width: data.progression + '%', 'transition': data.duration ? 'width ' + data.duration + 's ease' : '' }"></i>
-                    </button>
-                    <template v-if="reglages.admin">
-                        <router-link to="/admin/log?type=parking">Historique des
-                            accès</router-link>
-                    </template>
-                </div>
-                <b>Cet outil est en phase de beta test, des perturbations peuvent survenir</b>
+                    <p class="mb-4 is-7">
+                        <!-- Description du bouton d'ouverture du parking -->
+                        Déverrouillage du
+                        <a @click="voirPhotoParking"><u>parking voitures de Bliiida</u></a> pendant
+                        quelques
+                        secondes.
+                    </p>
+                    <div class="buttons">
+                        <!-- Bouton d'ouverture du parking -->
+                        <button class="button is-link"
+                            :class="{ 'is-loading': data.loading, 'is-success': data.parking_ouvert }"
+                            @click="ouvrirParking">
+                            <span class="icon is-small">
+                                <i class="fas" :class="'fa-' + data.icone"></i>
+                            </span>
+                            <span>
+                                {{ data.message_parking }}
+                            </span>
+                            <i class="progression"
+                                :style="{ width: data.progression + '%', 'transition': data.duration ? 'width ' + data.duration + 's ease' : '' }"></i>
+                        </button>
+                        <template v-if="reglages.admin">
+                            <router-link to="/admin/log?type=parking">Historique des
+                                accès</router-link>
+                        </template>
+                    </div>
+                    <b>Cet outil est en phase de beta test, des perturbations
+                        peuvent
+                        survenir</b>
+                </template>
+                <template v-else>
+                    <b class="has-text-danger">L'ouverture du parking est momentanément indisponible
+                        pour cause de soucis
+                        techniques.</b>
+                </template>
 
             </div>
         </div>
@@ -54,7 +63,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { Client, Databases, ID, Account } from 'appwrite';
 import { useAuthStore } from '@/stores/auth';
 import { useReglagesStore } from '@/stores/reglages';
@@ -78,6 +87,9 @@ const data = reactive({
     afficher_porte_parking: false, // Indicateur d'affichage de la photo du parking
 });
 
+const parkingActif = computed(() => {
+    return false;
+})
 const demarrerProgression = (duration) => {
     data.duration = 0;
     data.progression = 100;
