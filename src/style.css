@@ -7,6 +7,10 @@ body {
   background-color: #f2af10;
 }
 
+body:has(#blida-logo) {
+  background-color: black;
+}
+
 .media-content {
   overflow: initial !important;
 }

@@ -15,12 +15,14 @@ export const useReglagesStore = defineStore("reglages", {
     expires_at: null,
     divers: {},
     guest: false,
+    externe: false,
     visite: false,
   }),
   actions: {
     set(reglages) {
       this.reset();
       this.guest = reglages.guest;
+      this.externe = reglages.externe;
       this.visite = reglages.visite;
       this.droits = reglages.droits;
       this.settings = reglages.settings;
@@ -31,6 +33,7 @@ export const useReglagesStore = defineStore("reglages", {
       // reset state
       this.droits = {};
       this.guest = false;
+      this.externe = false;
       this.visite = false;
       this.settings = {};
       this.admin = false;

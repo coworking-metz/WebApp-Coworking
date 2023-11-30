@@ -4,9 +4,19 @@
       <div class="columns is-centered">
         <div class="column  is-5-widescreen">
           <div align="center" class="mb-4">
-            <a href="https://coworking-metz.fr">
-              <img alt="Coworking logo" src="./assets/logo.png" style="max-width:80%;width: 200px" />
-            </a>
+            <template v-if="reglages.externe">
+              <a href="https://bliiida.fr">
+                <img alt="Bliiida logo" id="blida-logo" src="./assets/bliiida.png"
+                  style="max-width:80%;width: 200px" />
+              </a>
+
+            </template>
+            <template v-else>
+              <a href="https://coworking-metz.fr">
+                <img alt="Coworking logo" src="./assets/logo.png"
+                  style="max-width:80%;width: 200px" />
+              </a>
+            </template>
           </div>
           <router-view />
         </div>
@@ -16,3 +26,8 @@
 </template>
 <style scoped>
 </style>
+
+<script setup>
+import { useReglagesStore } from '@/stores/reglages';
+const reglages = useReglagesStore();
+</script>

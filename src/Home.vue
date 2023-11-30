@@ -5,7 +5,7 @@
             <div class="card mb-5">
                 <div class="card-content">
                     <div class="media">
-                        <Polaroid v-if="!reglages.guest && data.loaded" />
+                        <Polaroid v-if="!reglages.externe && !reglages.guest && data.loaded" />
                         <div class="media-content">
                             <p class="title is-4">{{ auth.name }}</p>
                             <p class="subtitle is-6">{{ reglages.guest ? 'Visiteur' : auth.identifiant
@@ -14,7 +14,7 @@
                     </div>
 
                 </div>
-                <footer class="card-footer" v-if="!reglages.guest">
+                <footer class="card-footer" v-if="!reglages.guest && !reglages.externe">
                     <a href="https://www.coworking-metz.fr/mon-compte/" class="card-footer-item">Mon
                         compte</a>
                     <a href="https://www.coworking-metz.fr/mon-compte/polaroid/"
@@ -40,14 +40,14 @@
                 <div class="box">
                     <Parking />
                 </div>
-                <div class="box" v-if="!reglages.guest">
+                <div class="box" v-if="!reglages.guest && !reglages.externe">
                     <Presence />
                 </div>
-                <div class="box" v-if="!reglages.guest">
+                <div class="box" v-if="!reglages.guest && !reglages.externe">
                     <Signal />
                 </div>
             </template>
-            <Plan />
+            <Plan v-if="!reglages.externe" />
             <div class="box">
                 <button @click="deconnecter" class="button is-danger" type="button">
                     <span class="icon is-small">
