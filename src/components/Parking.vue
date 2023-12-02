@@ -13,7 +13,7 @@
         </figure>
         <div class="media-content">
             <div class="content">
-                <template v-if="parkingActif">
+                <template v-if="!parkingActif">
 
                     <p class="mb-4 is-7">
                         <!-- Description du bouton d'ouverture du parking -->
