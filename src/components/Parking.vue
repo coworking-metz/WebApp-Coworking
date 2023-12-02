@@ -13,7 +13,7 @@
         </figure>
         <div class="media-content">
             <div class="content">
-                <template v-if="!parkingActif">
+                <template v-if="parkingActif">
 
                     <p class="mb-4 is-7">
                         <!-- Description du bouton d'ouverture du parking -->
@@ -45,11 +45,8 @@
                         peuvent
                         survenir</b>
                 </template>
-                <template v-else>
-                    <b class="has-text-danger">L'ouverture du parking est momentanément indisponible
-                        pour cause de soucis
-                        techniques.</b>
-                </template>
+                <b class="has-text-danger">L'ouverture du parking connait des problèmes à cause du
+                    froid. Il est possible que le portail ne s'ouvre pas s'il fait moins de 1 degré.</b>
 
             </div>
         </div>
@@ -88,7 +85,7 @@ const data = reactive({
 });
 
 const parkingActif = computed(() => {
-    return false;
+    return true;
 })
 const demarrerProgression = (duration) => {
     data.duration = 0;
