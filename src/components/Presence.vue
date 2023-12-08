@@ -4,7 +4,7 @@
 
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64">
+                <p class="image is-64x64" v-if="!data.loading">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="80" fill="none" stroke="#cccccc"
                             stroke-width="20" />
@@ -22,7 +22,7 @@
 
 
 
-                    <p class="is-7">
+                    <p class="is-7" v-if="!data.loading">
                         <template
                             v-if="!reglages.settings.occupation || !reglages.settings.occupation.presents">Le
                             coworking est vide !</template>
@@ -92,6 +92,6 @@ function refreshPresence() {
     })
 }
 onMounted(() => {
-    setTimeout(refreshPresence, 2000);
+    refreshPresence();
 })
 </script>
