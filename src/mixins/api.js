@@ -80,7 +80,7 @@ export function useApi() {
             } else {
               uri += "&";
             }
-            uri += `?${objectToQueryString({
+            uri += `${objectToQueryString({
               user_id: auth.id,
               session: auth.session,
             })}`;

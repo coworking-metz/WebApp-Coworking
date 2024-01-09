@@ -22,7 +22,8 @@
         </div>
       </div>
     </section>
-    <center>Version {{ version }}</center>
+    <center><small>Version {{ version }}</small></center>
+    <br>
   </div>
 </template>
 <style scoped>
@@ -34,7 +35,7 @@ const reglages = useReglagesStore();
 import { computed } from 'vue';
 
 const version = computed(() => {
-  return __APP_VERSION__;
+  return __GIT_HASH__;
 })
 console.log(__APP_VERSION__)
 </script>
