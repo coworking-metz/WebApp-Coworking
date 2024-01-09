@@ -42,6 +42,7 @@ import { reactive, inject } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useReglagesStore } from '@/stores/reglages';
 import { useApi } from '@/mixins/api';
+import { isSafari } from '@/mixins/utils';
 const api = useApi();
 
 // Injection de la dépendance du router
@@ -66,7 +67,15 @@ const connexion = () => {
         email: data.email,
         password: data.password,
     };
-    api.post('app-auth', payload).then((response) => {
+    let login;
+
+    if (isSafari()) {
+        login = api.get('app-auth', payload)
+    } else {
+        login = api.post('app-auth', payload)
+
+    }
+    login.then((response) => {
         if (response.user) {
             auth.set(response.user)
             reglages.set(response.reglages)
@@ -78,7 +87,9 @@ const connexion = () => {
         } else {
             window.location.reload(true);
         }
-    });
+    }).catch(error => {
+        window.location.reload(true);
+    })
 };
 
 

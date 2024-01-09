@@ -86,7 +86,7 @@ const dashoffset = computed(() => {
 
 function refreshPresence() {
     data.loading = true;
-    api.post('app-droits').then((response) => {
+    api.get('app-droits').then((response) => {
         reglages.set(response)
         data.loading = false;
     })

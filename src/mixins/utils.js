@@ -31,3 +31,10 @@ export function connexion(response) {
     return alert(response.message);
   }
 }
+
+
+export function isSafari() {
+  const userAgent = navigator.userAgent;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  return isSafari;
+}

@@ -125,7 +125,7 @@ onMounted(async () => {
             data.loaded = true;
         } else {
             // Si une session est disponible, obtenir les détails de la session à partir de l'API
-            api.post('app-session').then(response => {
+            api.get('app-session').then(response => {
 
                 if (response.session) {
                     // auth.identifiant = response.user.login;

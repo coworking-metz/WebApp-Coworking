@@ -61,20 +61,13 @@ export const useReglagesStore = defineStore("reglages", {
     getDroits() {
       if (this.checkExpiry()) return Promise.resolve();
 
-      return api.post("app-droits", { user_id: this.id }).then((data) => {
+      return api.get("app-droits", { user_id: this.id }).then((data) => {
         console.log("Droits chargés");
         this.droits = data.droits;
         this.settings = data.settings;
         this.admin = data.admin;
       });
     },
-    // getSettings() {
-    //   // if (this.settings) return Promise.resolve();
 
-    //   afterOneHour(() => this.droits = null);
-    //   return api.post('app-settings').then((data) => {
-    //     this.settings = data.settings;
-    //   });
-    // },
   },
 });
