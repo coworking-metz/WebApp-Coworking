@@ -75,6 +75,8 @@ const connexion = () => {
         } else if (response?.code) {
             // Gestion des erreurs d'authentification
             return alert(response.message);
+        } else {
+            window.location.reload(true);
         }
     });
 };

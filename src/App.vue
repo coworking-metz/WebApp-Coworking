@@ -22,6 +22,7 @@
         </div>
       </div>
     </section>
+    <center>Version {{ version }}</center>
   </div>
 </template>
 <style scoped>
@@ -30,4 +31,10 @@
 <script setup>
 import { useReglagesStore } from '@/stores/reglages';
 const reglages = useReglagesStore();
+import { computed } from 'vue';
+
+const version = computed(() => {
+  return __APP_VERSION__;
+})
+console.log(__APP_VERSION__)
 </script>
