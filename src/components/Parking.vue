@@ -45,12 +45,9 @@
                         peuvent
                         survenir</b>
                 </template>
-<<<<<<< HEAD
                 <!-- <b class="has-text-danger">L'ouverture du parking connait des problèmes à cause du
                     froid. Il est possible que le portail ne s'ouvre pas s'il fait moins de 1 degré.</b> -->
 
-=======
->>>>>>> b6512628f670092a62ac7e1435e14dedfab498af
             </div>
         </div>
     </article>
