@@ -60,6 +60,8 @@
 import { ref, computed, onMounted, reactive } from 'vue';
 import { useReglagesStore } from '@/stores/reglages';
 import { useApi } from '@/mixins/api';
+import { isSafari } from "@/mixins/utils.js";
+
 const api = useApi();
 const reglages = useReglagesStore();
 
@@ -86,10 +88,19 @@ const dashoffset = computed(() => {
 
 function refreshPresence() {
     data.loading = true;
-    api.get('app-droits').then((response) => {
-        reglages.set(response)
-        data.loading = false;
-    })
+    if (isSafari()) {
+
+        api.get('app-droits').then((response) => {
+            reglages.set(response)
+            data.loading = false;
+        })
+    } else {
+        api.post('app-droits').then((response) => {
+            reglages.set(response)
+            data.loading = false;
+        })
+
+    }
 }
 onMounted(() => {
     refreshPresence();

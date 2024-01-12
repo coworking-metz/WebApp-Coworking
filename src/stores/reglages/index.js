@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useApi } from "@/mixins/api.js";
 import { useAuthStore } from "@/stores/auth";
-import { afterOneHour } from "@/mixins/utils.js";
+import { afterOneHour, isSafari } from "@/mixins/utils.js";
 import { addMonths } from "date-fns"; // Import the addMonths function
 
 const api = useApi();
@@ -60,13 +60,23 @@ export const useReglagesStore = defineStore("reglages", {
     },
     getDroits() {
       if (this.checkExpiry()) return Promise.resolve();
+      if (isSafari()) {
 
-      return api.get("app-droits", { user_id: this.id }).then((data) => {
-        console.log("Droits chargés");
-        this.droits = data.droits;
-        this.settings = data.settings;
-        this.admin = data.admin;
-      });
+        return api.get("app-droits", { user_id: this.id }).then((data) => {
+          console.log("Droits chargés");
+          this.droits = data.droits;
+          this.settings = data.settings;
+          this.admin = data.admin;
+        });
+      } else {
+        return api.post("app-droits", { user_id: this.id }).then((data) => {
+          console.log("Droits chargés");
+          this.droits = data.droits;
+          this.settings = data.settings;
+          this.admin = data.admin;
+        });
+
+      }
     },
 
   },
