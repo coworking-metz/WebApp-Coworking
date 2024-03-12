@@ -26,13 +26,7 @@
                         text-anchor="middle"
                         x="100"
                         y="112">
-                        {{
-                            data.loading
-                                ? '…'
-                                : `${
-                                      (data.members.length / MAX_CURRENT_MEMBERS).toFixed(0) * 100
-                                  } %`
-                        }}
+                        {{ data.loading ? '…' : `${attendeesPercentage} %` }}
                     </text>
                 </svg>
             </p>
@@ -92,6 +86,10 @@ const dashoffset = computed(() => {
     const rate = data.members.length / MAX_CURRENT_MEMBERS;
     const dashOffset = dasharray - rate * dasharray;
     return dashOffset;
+});
+
+const attendeesPercentage = computed(() => {
+    return ((data.members.length / MAX_CURRENT_MEMBERS) * 100).toFixed(0);
 });
 
 function refreshPresence() {
