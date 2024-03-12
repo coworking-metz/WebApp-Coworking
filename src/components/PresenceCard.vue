@@ -29,7 +29,9 @@
                         {{
                             data.loading
                                 ? '…'
-                                : `${(data.members.length / MAX_CURRENT_MEMBERS) * 100} %`
+                                : `${
+                                      (data.members.length / MAX_CURRENT_MEMBERS).toFixed(0) * 100
+                                  } %`
                         }}
                     </text>
                 </svg>
