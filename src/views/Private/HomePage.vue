@@ -45,11 +45,11 @@
                 :date="authStore.user.onboarding.date"
                 :with-parking-access="authStore.user.capabilities.includes('PARKING_ACCESS')" />
         </section>
-        <section v-if="authStore.user.capabilities.includes('UNLOCK_GATE')" class="box">
-            <PortailCard />
-        </section>
         <section v-if="authStore.user.capabilities.includes('PARKING_ACCESS')" class="box">
             <ParkingCard />
+        </section>
+        <section v-if="authStore.user.capabilities.includes('UNLOCK_GATE')" class="box">
+            <PortailCard />
         </section>
         <section class="box">
             <PresenceCard />

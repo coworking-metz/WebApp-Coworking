@@ -73,7 +73,7 @@ import { computed, onMounted, reactive } from 'vue';
 import { getCurrentMembers } from '@/services/tickets/members';
 import { useAuthStore } from '@/stores/auth';
 
-const MAX_CURRENT_MEMBERS = 28;
+const MAX_CURRENT_MEMBERS = 40;
 
 const authStore = useAuthStore();
 const data = reactive({
